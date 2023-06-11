@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/style.css" media="screen">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <title>Reguláris kifejezések - Szintaxis</title>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <p class="title"><strong>Reguláris kifejezések</strong></p>
+                <a class="hidden" href="#tartalom">Ugrás a tartalomra</a>
+                <nav>
+                    <a href="index.html">Főoldal</a> | <strong>Szintaxis</strong> | <a href="demo.html">Demó</a> | <a href="linkek.html">Linkek</a> |
+		<a href="" id="activate-high-contrast"><img src="css/high-contrast.svg" alt="nagykontrasztú változat" height="18"></a>
+		<a href="" id="activate-normal">Vissza a normál változatra</a>
+                </nav>
+            </header>
+            <main id="tartalom">
+                <article>
+                    <h1>„Tradicionális” <span lang="en">Unix</span> reguláris kifejezések</h1>
+
+                    <p>Az „alap” Unix reguláris kifejezéseinek definíciói a POSIX megjelenésével ugyan elavultak, ennek ellenére széles körben használatosak a visszafelé kompatibilitás miatt. A legtöbb reguláris kifejezést felismerő Unix (segéd)program, például a grep és a sed alapértelmezésként használja még ezeket. Ebben a szintaxisban a legtöbb karaktert literalként kezelik – saját magukra illeszkednek csak („a” illeszkedik „a”-ra, „(bc” illeszkedik „(bc”-re stb.). A kivételek az illesztő-karaktereknek nevezett metakarakterek:</p>
+
+                    <table>
+                        <tr>
+                            <td>.</td>
+                            <td>Illeszkedik bármilyen egyedülálló karakterre</td>
+                        </tr>
+
+                        <tr>
+                            <td>[ ]</td>
+                            <td>
+                                <p>Illeszkedik arra az egyedülálló karakterre, ami a zárójelek között fel van sorolva. Például, [abc]-re illeszkedik „a”, „b”, vagy „c”. [a-z]-re illeszkedik bármelyik kisbetű. A jelölések keverhetők: [abcq-z]-re illeszkedik a, b, c, q, r, s, t, u, v, w, x, y, z, de így is írható: [a-cq-z].</p>
+
+                                <p>A '-' karakter literálként viselkedik, ha a zárójelen belül első vagy utolsó helyen szerepel: [abc-] vagy [-abc]. A'[' vagy ']' karakterek illesztése nagyon egyszerű, csak a záró szögletes zárójelet előbb kell írni a nyitó szögletes zárójelnél: [][ab]-re illeszkedik ']', '[', 'a' vagy 'b'.</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>[^ ]</td>
+                            <td>Illeszkedik egy egyedülálló karakterre, amely nem szerepel a zárójelben felsoroltak között. Például, [^abc] illeszkedik bármilyen karakterre, amelyik nem „a”, „b”, vagy „c”. [^a-z] illeszkedik bármilyen egyedülálló karakterre, ami nem kisbetű. Amint azt már említettük, ezek a jelölések is keverhetők.</td>
+                        </tr>
+
+                        <tr>
+                            <td>^</td>
+                            <td>Illeszkedik a sor kezdetére (vagy bármelyik sorra, többsoros mód alkalmazása esetén)</td>
+                        </tr>
+
+                        <tr>
+                            <td>$</td>
+                            <td>Illeszkedik a sor végére (vagy bármelyik sorra, többsoros mód alkalmazása esetén)</td>
+                        </tr>
+
+                        <tr>
+                            <td>\( \)</td>
+                            <td>Egy „megjelölt alkifejezést” definiál. Az alkifejezés illeszkedés később is ellenőrizhető. Lásd a következő, \n pontot. Megjegyezzük, hogy a „megjelölt alkifejezés” helyett gyakran a „blokk” kifejezés használatos.</td>
+                        </tr>
+
+                        <tr>
+                            <td>\n</td>
+                            <td>Ahol n egy 1 és 9 közötti számjegy; az n-edik megjelölt alkifejezést illeszti. Ez a konstrukció elméletileg szabálytalan és nem engedi meg minden reguláris kifejezés kiértékelő szintaxisa.</td>
+                        </tr>
+
+                        <tr>
+                            <td>*</td>
+                            <td>
+                                <ul>
+                                    <li>Egy egyszerű karakter kifejezést követő „*” a kifejezés nulla vagy több másolatát illeszti. Például, „[xyz]*” illeszkedik a következőkre „”, „x”, „y”, „zx”, „zyx”, és így tovább.</li>
+                                    <li>\n*, ahol n egy 1 és 9 közötti számjegy, nulla vagy több iterációval illeszti az n-edik megjelölt alkifejezést. Például, „\(a.\)c\1*” illeszkedik „abcab”-re és „abcaba”-re, de nem illeszkedik „abcac”-re.</li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>{x,y}</td>
+                            <td>Az utolsó „blokkot” legalább x-szer, de legfeljebb y-szor illeszti. Például, „a{3,5}”-re illeszkedik „aaa”, „aaaa” vagy „aaaaa”. Megjegyezzük, hogy ez sem található meg minden regex megvalósításban.</td>
+                        </tr>
+                    </table>
+
+                <p>A különféle beállításoktól, értelmezésektől függően változhat a karakterek sorrend szerinti csoportosítása (például bizonyos beállítások szerint a karakterek sorrendje az abc..yzABC..YZ szerinti, míg más elv szerint az aAbBcC..yYzZ a sorrend).</p>
+
+                <table>
+                  <caption>
+                    <details>
+                      <summary>POSIX osztályok</summary>
+                      <p>A – nem mindenki által elfogadott – POSIX szabvány meghatározza a karakterek osztályokba vagy csoportokba sorolást az alábbi tábla alapján.</p>
+                      <p>Például: [[:upper:]ab] meghatározza az összes nagybetűt és a kisbetűs 'a'-t és 'b'-t.</p>
+                    </details> 
+                  </caption>
+                  <tr><th>POSIX osztály</th> <th>Megfelel</th>        <th>Jelentése</th></tr>
+                  <tr><td>[:upper:]</td>     <td>[A-Z]</td>           <td>Nagybetűk</td></tr>
+                  <tr><td>[:lower:]</td>     <td>[a-z]</td>           <td>Kisbetűk</td></tr>
+                  <tr><td>[:alpha:]</td>     <td>[A-Za-z]</td>        <td>Nagy- és kisbetűk</td>  </tr>
+                  <tr><td>[:alnum:]</td>     <td>[A-Za-z0-9]</td>     <td>Számjegyek, nagy- és kisbetűk</td></tr>
+                  <tr><td>[:digit:]</td>     <td>[0-9]</td>           <td>számjegyek</td></tr>
+                  <tr><td>[:xdigit:]</td>    <td>[0-9A-Fa-f]</td>     <td>hexadecimális számjegyek</td></tr>
+                  <tr><td>[:punct:]</td>     <td>[.,!?:…]</td>        <td>elválasztó karakterek</td></tr>
+                  <tr><td>[:blank:]</td>     <td>[ \t]</td>           <td>szóköz és TAB</td></tr>
+                  <tr><td>[:space:]</td>     <td>[ \t\n\r\f\v]</td>   <td>üres karakterek</td></tr>
+                  <tr><td>[:cntrl:]</td>     <td></td>                <td>vezérlő karakterek</td></tr>
+                  <tr><td>[:graph:]</td>     <td>[^ \t\n\r\f\v]</td>  <td>nyomtatásvezérlő karakterek</td></tr>
+                  <tr><td>[:print:]</td>     <td>[^\t\n\r\f\v]</td>   <td>nyomtatásvezérlő karakterek és szóköz</td></tr>
+                </table>
+
+                <aside>
+                    <p>Részletesebb információ: <a href="https://web.archive.org/web/20060418224525/http://www.billposer.org/Software/RedetManual/builtincharclass.html">a különböző POSIX osztályok ASCII kódtáblákon, színesben</a>.
+                    </p></aside>
+                    <aside>
+                        <p>Megjegyezzük, hogy a magyar ábécé ékezetes betűinek kezelése esetenként eltérő módon történik, ugyanis a különféle szabványok nem minden esetben térnek ki a különböző országokban használatos, az angol ábécé betűitől eltérő betűk kódolására, kezelésére. Gyakori probléma például, hogy az ábécé szerinti rendezésnél az ékezetes betűk rossz helyre kerülnek, mivel a karakterek kódjai – többnyire – a nem ékezetes karakterek kódjai után következnek, tehát rendezés szempontjából azok valóban „nincsenek sorban”.</p>
+                    </aside>
+                </article>
+
+                <article>
+                    <h1><span lang="en">POSIX</span> modern (bővített) reguláris kifejezések</h1>
+
+                    <p>Több modern, „bővített” reguláris kifejezést használhatnak a modern Unix segédprogramok a parancssorban az „-E” jelző hatására.</p>
+
+                    <p>A POSIX bővített reguláris kifejezéseinek szintaxisa néhány kivételtől eltekintve megegyezik a „tradicionális” Unix reguláris kifejezéseivel. A következő metakaraktereket értelmezi még a program:</p>
+
+                    <ul>
+                        <li><b>+</b>Az utolsó „blokk” egyszeri vagy többszöri illesztése – „ba+” illeszkedik a következőkre: „ba”, „baa”, „baaa” és így tovább.</li>
+                        <li><b>?</b> Az utolsó „blokk” illesztése (csak egyszer) vagy nem illesztése – „ba?” illeszkedik a következőkre: „b” vagy „ba”</li>
+                        <li><b>|</b> A választás (vagy unióképző) operátor: az operátort megelőző vagy követő kifejezést illeszti – „abc|def”-re illeszkedik „abc” vagy „def”.</li>
+                    </ul>
+
+                    <p>A „visszatörtjel” eltávolítása: \{…\} átalakul {…}-re és \(…\) átalakul (…)-re. Példák:</p>
+
+                    <ul>
+                        <li>„[hc]+at” illeszkedik a következőkre: „hat”, „cat”, „hhat”, „chat”, „hcat”, „ccchat” stb.</li>
+                        <li>„[hc]?at” illeszkedik „hat”-ra, „cat”-ra és „at”-ra</li>
+                        <li>„([cC]at)|([dD]og)” illeszkedik a következőkre: „cat”, „Cat”, „dog” és „Dog”</li>
+                    </ul>
+
+                    <p>A speciális jelentéssel bíró '(', ')', '[', ']', '.', '*', '?', '+', '^' és '$' karakterek a '\' feloldójel használatával lesznek literálként értelmezve. Példa: „a\.(\(|\))” illeszkedik az „a.)” vagy az „a.(” stringekre.</p>
+                </article>
+
+                <article>
+                    <h1>Perl-kompatibilis reguláris kifejezések (PCRE)</h1>
+
+                    <p>A Perl egy gazdag és következetes szintaktikai elemzővel rendelkezik, amely még a POSIX kiterjesztett reguláris kifejezéseinek elemzésére is alkalmas. A következetességre jó példa, hogy a \ karakter minden esetben egy nem alfanumerikus karaktert jelöl. Szabályozható, hogy a specifikáció kiválasztásával milyen illesztési algoritmust használjon az elemző: a Perl szintaxis, szemben a POSIX szintaxissal a „mohó” algoritmust követi, míg a másik nem. Ez azt jelenti a gyakorlatban, hogy a /a.*b/ minta .* jelölése azt jelenti, hogy annyit illesszen az elemző, amennyit lehet, míg a /a.*?b/ mintában a .*? jelöli, hogy csak olyan kicsit illesszen az elemző, amennyit csak lehet. Ha adott a „a bad dab” string, akkor az első minta illeszkedik az egész stringre, míg a második csak az „a b” részt „ismeri fel”.</p>
+
+                    <p>A fentiek miatt több alkalmazás és segédprogram is megvalósítja a „Perl-szerű” szintaxist, többek között a Python és a Ruby. Készültek olyan alkalmazások, például a Tcl, amely a POSIX előírásokat és a Perl kiterjesztéseket is megvalósítja. Ennek viszont az a következménye, hogy a Tcl illesztési modellje nem mohó, azaz a „lehető legkisebb” illesztési elvet valósítja meg.</p>
+                </article>
+            </main>
+
+            <footer>
+                <p>Készítette: Andorka György (<a href="mailto:gyorgy.andorka@protonmail.com">gyorgy.andorka@protonmail.com</a>). Ez a weboldal <a href="https://hu.wikipedia.org/wiki/Regul%C3%A1ris_kifejez%C3%A9s">a Wikipédia “Reguláris_kifejezés” szócikke</a> alapján készült.</p>
+            </footer>
+        </div>
+        <script src="css/css-switch.js"></script>
+    </body>
+</html>

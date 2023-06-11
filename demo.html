@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/style.css" media="screen">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <title>Reguláris kifejezések - Demó</title>
+    </head>
+
+    <body>
+        <div class="container">
+        <header>
+            <p class="title"><strong>Reguláris kifejezések</strong></p>
+            <a class="hidden" href="#tartalom">Ugrás a tartalomra</a>
+            <nav>
+                <a href="index.html">Főoldal</a> | <a href="szintaxis.html">Szintaxis</a> | <strong>Demó</strong> | <a href="linkek.html">Linkek</a> |
+		<a href="" id="activate-high-contrast"><img src="css/high-contrast.svg" alt="nagykontrasztú változat" height="18"></a>
+		<a href="" id="activate-normal">Vissza a normál változatra</a>
+            </nav>
+        </header>
+        <main id="tartalom">
+            <article>
+            <h1>Interaktív demó</h1>
+            <p>Ezen az oldalon a böngészőben is kipróbálhatod a reguláris kifejezések használatát a JavaScript szintaxisával (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet">puska a JavaScript reguláris kifejezéseihez</a>).</p>
+            <form method="post" action="mailto:gyorgy.andorka@protonmail.com">
+                <fieldset>
+                    <!-- <legend>Demo</legend> -->
+                    <!-- label = megfelelo urlapelembe viszi a kurzort kattintasra -->
+                    <!-- (szovegfelolvasonal kulonosen relevans) -->
+                    <label for="demo1"><strong>Reguláris kifejezés</strong></label><br>
+                    <input type="text" name="regex" id="demo1" size="50" maxlength="100"><br>
+                    <label for="demo2"><strong>Csere szöveg</strong></label><br>
+                    <input type="text" name="regex_replacement" id="demo2" size="50" maxlength="100"><br>
+                    <label for="demo3"><strong>Eredeti szöveg</strong></label><br>
+                    <textarea name="test_input"
+                              id="demo3" rows="5" cols="50" maxlength="1000"></textarea><br>
+                    <label for="demo4"><strong>Módosított szöveg</strong></label><br>
+                    <textarea name="modified_input"
+                              id="demo4" rows="5" cols="50" maxlength="1000"></textarea><br>
+                </fieldset>
+                <fieldset>
+                    <input type="submit" value="Cseréld">
+                    <input type="reset" value="Alaphelyzet">
+                    <!-- <br> -->
+                </fieldset>
+                <fieldset>
+                    <input type="radio" id="r1" name="r" value="replace_all" checked>
+                    <label for="r1">globális keresés (minden találatot cserél)</label>
+                    <br>
+                    <input type="radio" id="r2" name="r" value="replace_first">
+                    <label for="r2">csak az első találatot</label>
+                    <!-- <br> -->
+                </fieldset>
+                <fieldset>
+                    <input type="checkbox" id="check1" name="check" value="case_sensitive" checked>
+                    <label for="check1">kis- és nagybetűk megkülönböztetése</label>
+                </fieldset>
+            </form>
+            </article>
+        </main>
+          <footer>
+              <p>Készítette: Andorka György (<a href="mailto:gyorgy.andorka@protonmail.com">gyorgy.andorka@protonmail.com</a>). Ez a weboldal <a href="https://hu.wikipedia.org/wiki/Regul%C3%A1ris_kifejez%C3%A9s">a Wikipédia “Reguláris_kifejezés” szócikke</a> alapján készült.</p>
+          </footer>
+        </div>
+        <script src="css/css-switch.js"></script>
+    </body>
+</html>

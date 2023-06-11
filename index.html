@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/style.css" media="screen">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <title>Reguláris kifejezések - Főoldal</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <header class="col">
+                <p class="title"><strong>Reguláris kifejezések</strong></p>
+                <!-- "blokkok elkerülése" -->
+                <a class="hidden" href="#tartalom">Ugrás a tartalomra</a>
+                <nav>
+                    <strong>Főoldal</strong> | <a href="szintaxis.html">Szintaxis</a> | <a href="demo.html">Demó</a> | <a href="linkek.html">Linkek</a> |
+		<a href="" id="activate-high-contrast"><img src="css/high-contrast.svg" alt="nagykontrasztú változat" height="18"></a>
+		<a href="" id="activate-normal">Vissza a normál változatra</a>
+                </nav>
+            </header>
+
+            <main id="tartalom">
+                <article>
+                    <h1>Bevezetés</h1>
+                    <p>A reguláris kifejezés (rövidítve: regexp vagy regex az angol regular expression után) egy olyan, bizonyos szintaktikai szabályok szerint leírt string, amivel meghatározható stringek egy halmaza.</p>
+                    <p>Az ilyen kifejezés valamilyen minta szerinti szöveg keresésére, cseréjére, illetve a szöveges adatok ellenőrzésére használható. A reguláris kifejezéseket sok szövegszerkesztő, illetve segédprogram használja, főleg szövegek keresésekor vagy szövegek bizonyos minták szerinti kezelésekor.</p>
+
+                    <figure class="noprint">
+                        <img src="media/index_wikipedia_blacklist.png"
+                             alt="A Wikipédia reguláris kifejezésekkel meghatározott feketelistája a tiltott címekről">
+                        <figcaption>A Wikipédia reguláris kifejezésekkel meghatározott feketelistája a tiltott címekről</figcaption>
+                    </figure>
+
+                </article>
+
+
+                <article>
+                    <h1>Alapkoncepció</h1>
+
+                    <p>A gyakran mintának nevezett reguláris kifejezés a jelsorozatok, stringek egy halmazát határozza meg. A minták használatával tömören megadhatók halmazok leírásai anélkül, hogy az összes elemüket fel kellene sorolni. Tegyük fel például, hogy egy halmaz a következő jelsorozatokat tartalmazza: <i>Handel</i>, <i>Händel</i>, és <i>Haendel</i>. Leírhatók-e a halmaz elemei a <code>H(ä|ae?)ndel</code> mintával (más szavakkal: mondhatjuk-e, hogy a mintához mindhárom string illeszkedik)? Amint az a későbbiekből kiderül, általában azonos halmazok különböző mintákkal is leírhatóak.</p>
+
+                    <p>A legtöbb formalizálásnál a következő operátorok használatával konstruálhatók meg a megfelelő reguláris kifejezések.</p>
+
+                    <section>
+                        <h2>választás</h2>
+
+                        <p>A függőleges vonal (<code>|</code>) a lehetséges alternatívákat választja el. Például a <code>kap|kép</code> minta alternatívákhoz illeszkedik a <i>kap</i> vagy a <i>kép</i> jelsorozat is.</p>
+                    </section>
+
+                    <section>
+                        <h2>csoportosítás</h2>
+
+                        <p>A zárójelek az operátorok hatásköre elsőbbségének a meghatározására szolgálnak. Például, a <code>kap|kép</code> és <code>k(a|é)p</code> minták különbözőek, de ugyanazok a jelsorozatok illeszkednek hozzájuk (<i>kap</i> és <i>kép</i>).</p>
+                    </section>
+
+                    <section>
+                        <h2>mennyiségjelzés</h2>
+
+                        <p>A mennyiségjelző egy karakter vagy csoport után azt határozza meg, hogy hányszor fordulhat elő a megelőző kifejezés. A leggyakoribb mennyiségjelzők a <code>?</code>, a <code>*</code> és a <code>+</code>:</p>
+
+                        <b>?</b>
+                        <p>A kérdőjel jelzi, hogy a megelőző kifejezés csak 0 vagy 1 esetben fordulhat elő. Például, a <code>colou?r</code> minta illeszkedik a <i>color</i> és a <i>colour</i> jelsorozatok közül bármelyikre.</p>
+
+                        <b>*</b>
+                        <p>A csillag jelzi, hogy a megelőző kifejezés akárhány esetben fordulhat elő (beleértve a nullát is). Például, <code>go*gle</code> minta illeszkedik a <i>ggle</i>-e, a <i>gogle</i>-re, a <i>google</i>-re stb.</p>
+
+                        <b>+</b>
+                        <p>A plusz karakter jelzi, hogy a megelőző kifejezés legalább 1 esetben fordulhat elő. Például a <code>go+gle</code> mintához illeszkedik a <i>gogle</i>, <i>google</i> stb. (de a <i>ggle</i> nem!).</p>
+
+                        <b>{n}</b>
+                        <p>A kapcsos zárójel jelzi, hogy a megelőző kifejezés pontosan n esetben fordulhat elő.</p>
+                    </section>
+
+                    <p>A fenti konstrukciók egymással kombinálva a különféle formák komplex ellenőrzését teszik lehetővé.</p>
+
+                    <aside>
+                        A reguláris kifejezések pontos szintaxisa a változó eszközök és alkalmazások miatt egységesen nem adható meg; a további részleteket lásd a <a href="szintaxis.html">Szintaxis</a> oldalon.
+                    </aside>
+
+                </article>
+
+                <article>
+                    <h1>Történet</h1>
+
+                    <p>A reguláris kifejezések először az automata elmélet és formális nyelvek elmélete kapcsán merültek fel. Ezek az elméletek a számítógép működésének modellezésénél (automaták), illetve ezek osztályozásánál és leírásánál (formális nyelvek) voltak fontosak. Az 1940-es években Warren McCulloch és Walter Pitts az idegrendszer neuronokkal történő modellezésének leírásához használt egy kicsiny, egyszerű automatát. A matematikus Stephen Kleene ugyanezt a modellt matematikai jelölésekkel, az úgynevezett reguláris halmazok alkalmazásával írta le. Ken Thompson ezt a jelölési módot építette be az általa készített QED szövegszerkesztő programba. Ez került a Unix szerkesztőjébe (ed) is, ami a reguláris kifejezéseket használó grep elkészüléséhez vezetett. Azóta a reguláris kifejezések széles körben elterjedtek a Unix és a Unix-szerű rendszerek segédprogramjainál, amilyenek például az expr, az awk, az Emacs, a vi, a lex és a Perl.</p>
+
+                    <figure class="noprint">
+                        <img src="media/index_kleene.jpg"
+                             alt="Stephen Cole Kleene, a reguláris kifejezések atyja">
+                        <figcaption>Stephen Cole Kleene, a reguláris kifejezések atyja</figcaption>
+                    </figure>
+                </article>
+
+                <article>
+                    <h1>Kapcsolat a formális nyelvek elméletével</h1>
+
+                    <p>A reguláris kifejezések konstansokból és operátorokból épülnek fel, stringek egy bizonyos halmazát jelölik, illetve műveleteket definiálnak a halmaz elemeire, vagy az elemei között.</p>
+
+                    <p>Adott véges Σ ábécé a következő konstansokat</p>
+
+                    <ul>
+                        <li>(üres halmaz) Ø halmaz jelölése Ø</li>
+                        <li>(üres string) ε halmaz jelölése {ε}</li>
+                        <li>(literál karakter) a Σ része, halmaz jelölése {a}</li>
+                    </ul>
+
+                    <p>és a következő operátorokat definiálja:</p>
+
+                    <ul>
+                        <li>(konkatenáció) RS halmaz jelölése { αβ | α R-ben és β S-ben }. Például {„ab”, „c”}{„d”, „ef”} = {„abd”, „abef”, „cd”, „cef”}.</li>
+                        <li>(választás) R|S jelöli a halmazok R és S unióját.</li>
+                        <li>(Kleene csillag) R* jelöli azt az R legkisebb részhalmazát, amely tartalmazza ε-t és a stringjeinek konkatenációit. Ez a konkatenált stringek halmaza úgy áll elő, hogy többször vagy egyszer sem konkatenáljuk az R halmazban lévő stringeket. Például {„ab”, „c”}* = {ε, „ab”, „c”, „abab”, „abc”, „cab”, „cc”, „ababab”, … }.</li>
+                    </ul>
+
+                    <p>A felesleges zárójelezések elkerülésére a műveletek eltérő prioritásúak: megegyezés szerint a Kleene csillag nagyobb prioritású, mint a konkatenáció és a konkatenáció nagyobb prioritású, mint az unió, így elhagyhatók a zárójelek, amennyiben az nem okoz kétértelműséget. Például, az (ab)c abc-nek is írható és az a|(b(c*))-t írhatjuk mint a|bc*.</p>
+
+                    <p>A reguláris kifejezések formális definíciói szándékosan a lehető legegyszerűbbek és igyekszenek elkerülni a redundáns mennyiségi jelölőket, (? és +) amelyek kifejezhetőek a következőképpen: a+= aa*, és a? = (ε|a). Néha a komplementer képző operátort ~ is használják (~R jelöli az összes string halmazát a Σ ábécé felett, amelyek nem részei R-nek. A komplementerképző operátor redundáns: minden esetben kifejezhető egyéb operátorok használatával.</p>
+
+                    <p>A reguláris kifejezések ebben az értelemben pontosan kifejezhetők a nyelvek azon csoportjával, amelyeket véges automata el tud fogadni: a reguláris nyelvekkel. A reguláris kifejezések által definiált nyelvek osztálya megfelel a Chomsky-féle hierarchia harmadik típusú nyelvtanainak, és leírásukhoz a reguláris nyelvek használhatók.</p>
+
+                    <aside>
+                        A minták használatának lehetőségeiből származó előnyök túlmutatnak a reguláris nyelveken. Például megjelölt alkifejezések zárójelek segítségével történő csoportosítása és azok későbbi kiértékelése, minták használatával, különösen az ismétlődő szavak esetében („papa”, „WikiWiki” stb.) a formális nyelvek elméletében bevett gyakorlat, és a „(.*)\1” mintával igen egyszerűen kivitelezhető. Ugyanakkor a fenti megoldás nem megengedett még a környezetfüggetlen nyelvek esetében sem. A mintaillesztést korlátlan számú előzetes referencia használatával azonban számos modern eszköz, könyvtár, elemző implementálja. Ezek a „reguláris kifejezés” és a hozzá tartozó mintaillesztés jelentését valójában jóval tágabban értelmezik a formális nyelvek elméletéhez képest.
+                    </aside>
+
+                    <section>
+                        <h2>Illusztráció - véges automata</h2>
+                        <figure id="video_fig" class="noprint">
+                            <a href="video_description.html" class="hidden">A videó tartalmának szöveges leírása</a>
+                            <video controls="controls" poster="media/video_poster.png">
+                                <source src="media/regex_automata.mp4">
+                            </video>
+                            <figcaption>A „S+NAKE” reguláris kifejezést felismerő automata feldolgozza a „SSSSNAKE” stringet.</figcaption>
+                        </figure>
+                    </section>
+
+                </article>
+            </main>
+
+            <footer>
+                <p>Készítette: Andorka György (<a href="mailto:gyorgy.andorka@protonmail.com">gyorgy.andorka@protonmail.com</a>). Ez a weboldal <a href="https://hu.wikipedia.org/wiki/Regul%C3%A1ris_kifejez%C3%A9s">a Wikipédia “Reguláris_kifejezés” szócikke</a> alapján készült.</p>
+            </footer>
+        </div>
+        <!-- end container div -->
+        <script src="css/css-switch.js"></script>
+    </body>
+</html>

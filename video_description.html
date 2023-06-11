@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <meta charset="utf-8">
+        <title>Reguláris kifejezések - Videó leírás</title>
+    </head>
+    <body>
+        <p>A videó illusztrálja, hogyan dolgozza fel a "S+NAKE" reguláris kifejezést felismerő véges automata az "S", "S", "S", "S", "N", "A", "K", "E" karakterekből álló sztringet.</p>
+        <p>A videó felső részén a kereső sztring látható, alatta a véges automata rajza. Az animáció minden lépésben színessel kiemeli a kereső sztringből az aktuálisan feldolgozott karaktert, valamint lent az automata rajzán az aktuális állapotot, és a lehetséges következő állapotokat, ahogyan az automata végighalad a karaktereken.</p>
+        <p>Az automata kezdetben egy "S" karaktert vár. A keresősztring nyitó "S" karakterére lépve az automata következő állapotában legalább egy újabb "S" karaktert vár. A keresősztring második "S" karaktere után az automata már a következő állapotába kerül, ahol a lehetséges állapotátmenetek közül egy újabb "S" karakter ugyanebbe az állapotba viszi át, az "N" karakter pedig továbblépteti. A keresősztring harmadik és negyedik "S" karaktere hasonlóképpen ugyanabba az állapotba juttatja vissza az automatát. A keresősztringben ezután következő "N" karakter továbblépteti az automatát a következő állapotba, ahol az egyetlen lehetséges állapotátmenet egy "A" karakter olvasására következik be. A keresősztringben következő "A", "K" és "E" karakterek ezután analóg módon továbbléptetik az automatát a következő hasonló, pontosan egyféle karaktert elfogadó állapotra. Az "E" karakter utáni "input vége" bemenet a végállapotba viszi át az automatát, amely a keresősztringet ezzel teljesen feldolgozta.</p>
+    </body>
+</html>

@@ -1,0 +1,137 @@
+/* hack, hogy a képernyőolvasó számára ne tűnjön el */
+/* https://stackoverflow.com/questions/2928688/how-to-hide-elements-without-having-them-take-space-on-the-page/25339638#25339638 */
+.hidden {
+  position:absolute;
+  left:-999em;
+}
+
+#activate-normal {
+    display: none;
+}
+
+.regex_bg {
+  background-image: url("../media/bg.png");
+  background-size: 50%;
+  background-repeat: repeat;
+}
+
+section {
+  background: #eaeaea;
+  border-radius: 15px;
+  padding: 15px 15px 15px 15px;
+  margin: 20px 10px 20px 10px;
+}
+
+h1 {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+h2 { font-size: 1.2rem; }
+
+table {
+  margin: 30px;
+  /* background: #fdfdfd; */
+}
+
+aside {
+  border: 1px dashed grey;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px 20px;
+  background: #efefef;
+  font-size: 1.0rem;
+}
+
+figure#video_fig {
+    vertical-align: center;
+}
+figcaption {
+    text-align: center;
+}
+video { width: 100%; }
+
+/* index.html illusztrációk */
+figure img {
+    width: 25%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* linkek.html (kepek bootstrap gridben) */
+img.link_screenshot {
+    margin: auto;
+    display: block;
+    width: 80%;
+    padding: 10px 0px 10px 0px;
+}
+
+header, footer { background:#e5e5e5; }
+main { background: #fcfcfc; }
+
+header {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  padding: 2px 2px 2px 2px;
+  text-align: center;
+
+  font-family: "ubuntu mono", monospace;
+  font-size: 1.2rem;
+}
+main {
+  padding: 10px 10px 10px 10px;
+}
+footer {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+table {
+  font-size: 1.0rem;
+  border-collapse: collapse;
+}
+th, td {
+  border-bottom: 1px solid #ccc;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+th {
+  background: #ccc;
+}
+
+.title { text-align: center; }
+
+details {
+  color: black;
+}
+details p {
+  font-size: 0.9rem;
+  color: black;
+}
+
+body { font-family: ubuntu, helvetica, sans-serif; }
+
+p {
+  text-align: justify;
+}
+footer p {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+figcaption { font-size: 0.9rem; }
+
+nav a, nav a:visited, nav a:hover {
+  color: #a22;
+  text-decoration: none;
+}
+a, a:hover, a:visited { text-decoration: underline; }
+a:visited { color: #243; }
+
+fieldset {
+    border:none;
+    margin-left: 20px;
+}
+
+textarea, input { margin-bottom: 8px; }

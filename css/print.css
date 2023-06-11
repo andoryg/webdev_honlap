@@ -1,0 +1,24 @@
+header, footer {
+  display: none;
+}
+.noprint {
+  display: none;
+}
+
+/* main { */
+/*   column-width: 17em; */
+/*   column-gap: 3em; */
+/* } */
+
+img {
+  width: 20%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+img.link_screenshot {
+  margin-left: 0;
+}
+figcaption {
+  text-align: center;
+}
